@@ -1,63 +1,87 @@
-# CareerConnect – Job Portal Backend
+# 🚀 CareerConnect – Full-Stack Job Portal
 
-CareerConnect is a RESTful Job Portal Backend developed using Java and Spring Boot. It provides a platform where recruiters can publish job opportunities and job seekers can search and apply for jobs.
+CareerConnect is a full-stack Job Portal application built using **Java, Spring Boot, React, and MySQL**.
 
-The application implements JWT authentication, role-based authorization, job management, and application tracking.
-
-## 🚀 Tech Stack
-
-- **Language:** Java 17
-- **Backend Framework:** Spring Boot
-- **Database:** MySQL
-- **ORM:** Spring Data JPA / Hibernate
-- **Security:** Spring Security
-- **Authentication:** JWT (JSON Web Tokens)
-- **Password Encryption:** BCrypt
-- **API Documentation:** Swagger / OpenAPI
-- **Build Tool:** Maven
-- **Version Control:** Git and GitHub
+The platform connects job seekers with recruiters. Job seekers can browse available opportunities, apply for jobs, and track their applications. Recruiters can publish job openings, view applicants, and manage application statuses.
 
 ## ✨ Features
 
-### User Management
-- User registration and login.
-- Secure password encryption using BCrypt.
-- JWT-based authentication.
-- Role-based access control.
+### 👨‍💻 Job Seeker
+- User registration and login
+- Browse available job listings
+- Search for jobs
+- Apply for jobs
+- View submitted applications
+- Track application status
 
-### Job Management
-- Recruiters can create job postings.
-- View all available jobs.
-- Retrieve individual job details.
-- Update and delete recruiter-owned jobs.
-- Job search functionality.
-- Pagination and sorting.
+### 🏢 Recruiter
+- Recruiter registration and login
+- Dedicated recruiter dashboard
+- Post job opportunities
+- View applications received
+- Accept or reject applications
+- Manage application statuses
 
-### Job Application Management
-- Job seekers can apply for jobs.
-- View their own applications.
-- Recruiters can view applications for their jobs.
-- Recruiters can accept or reject applications.
-- Duplicate applications are prevented.
-- Application status tracking.
+### 🔐 Authentication and Security
+- JWT-based authentication
+- Password encryption using BCrypt
+- Role-based authorization
+- Protected frontend routes
+- Secure backend endpoints
+- Duplicate application prevention
+- Input validation and exception handling
 
-### Security and Validation
-- JWT authentication filter.
-- Role-based endpoint protection.
-- Input validation.
-- Global exception handling.
-- Appropriate HTTP status codes.
+## 🛠️ Tech Stack
 
-## 📁 Project Structure
+### Frontend
+- React.js
+- JavaScript
+- Vite
+- React Router DOM
+- Axios
+- HTML
+- CSS
+
+### Backend
+- Java 17
+- Spring Boot
+- Spring Security
+- Spring Data JPA
+- Hibernate
+- REST APIs
+- JWT Authentication
+- Maven
+
+### Database and Tools
+- MySQL
+- MySQL Workbench
+- Swagger / OpenAPI
+- Postman
+- Git and GitHub
+- VS Code
+
+## 🏗️ Project Architecture
 
 ```text
-springboot-demo/
+CareerConnect/
+│
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   ├── App.jsx
+│   │   └── App.css
+│   ├── package.json
+│   └── vite.config.js
 │
 ├── src/
 │   └── main/
 │       ├── java/com/suma/springbootdemo/
 │       │   ├── config/
 │       │   ├── controller/
+│       │   ├── dto/
 │       │   ├── entity/
 │       │   ├── exception/
 │       │   ├── repository/
@@ -67,49 +91,41 @@ springboot-demo/
 │       └── resources/
 │           └── application.properties
 │
-├── .gitignore
 ├── pom.xml
-├── mvnw
-├── mvnw.cmd
 └── README.md
 ```
 
-## ⚙️ Setup and Installation
+## ⚙️ Installation and Setup
 
 ### Prerequisites
 
-Make sure you have installed:
+Install the following:
 
 - Java JDK 17
 - MySQL
+- Node.js and npm
 - Git
-- Maven (optional, as Maven Wrapper is included)
 
-### 1. Clone the Repository
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/SUMASUKASI/CareerConnect.git
-```
-
-### 2. Open the Project
-
-```bash
 cd CareerConnect
 ```
 
-### 3. Create the MySQL Database
+### 2. Configure the MySQL database
 
-Open MySQL and execute:
+Open MySQL Workbench and execute:
 
 ```sql
 CREATE DATABASE careerconnect;
 ```
 
-### 4. Configure Environment Variables
+### 3. Configure backend environment variables
 
-The application uses environment variables to protect database credentials and the JWT secret.
+The backend uses environment variables for database credentials and the JWT secret.
 
-Configure these variables before running the application:
+Set these variables before starting the backend:
 
 ```text
 DB_USERNAME=your_mysql_username
@@ -117,90 +133,105 @@ DB_PASSWORD=your_mysql_password
 JWT_SECRET=your_secure_random_secret
 ```
 
-Use a sufficiently long, randomly generated JWT secret. Do not commit actual credentials or secrets to GitHub.
+Do not commit actual database credentials or JWT secrets to GitHub.
 
-### 5. Run the Application
+### 4. Start the Spring Boot backend
+
+Open a terminal in the project root directory.
 
 On Windows:
 
 ```powershell
+$env:DB_USERNAME = "your_mysql_username"
+$env:DB_PASSWORD = "your_mysql_password"
+$env:JWT_SECRET = "your_secure_random_secret"
+
 .\mvnw.cmd spring-boot:run
 ```
 
-On macOS/Linux:
-
-```bash
-./mvnw spring-boot:run
-```
-
-The application runs at:
+The backend runs at:
 
 ```text
 http://localhost:8080
 ```
 
-## 📚 API Documentation
+### 5. Start the React frontend
 
-Swagger UI is available at:
+Open a second terminal:
 
-```text
-http://localhost:8080/swagger-ui/index.html
+```powershell
+cd frontend
+npm install
+npm run dev
 ```
 
-API documentation:
+The frontend runs at:
 
 ```text
-http://localhost:8080/v3/api-docs
+http://localhost:5173
 ```
 
-Swagger UI can be used to explore and test the available REST APIs.
+Open the frontend URL in your browser to use CareerConnect.
 
-## 🔑 Main API Endpoints
+## 📡 Main API Endpoints
 
 | Method | Endpoint | Description |
 |---|---|---|
 | POST | `/api/users/register` | Register a user |
-| POST | `/api/users/login` | User login |
+| POST | `/api/users/login` | Login |
 | GET | `/api/jobs` | Retrieve available jobs |
 | GET | `/api/jobs/{id}` | Retrieve job details |
 | POST | `/api/jobs` | Create a job |
 | PUT | `/api/jobs/{id}` | Update a job |
 | DELETE | `/api/jobs/{id}` | Delete a job |
 | POST | `/api/applications/{jobId}` | Apply for a job |
-| GET | `/api/applications/my` | View my applications |
-| GET | `/api/applications/recruiter` | View recruiter applications |
+| GET | `/api/applications/my` | View job seeker's applications |
+| GET | `/api/applications/recruiter` | View recruiter's applications |
 | PUT | `/api/applications/{applicationId}/status` | Update application status |
 
-**Note:** Access to endpoints depends on the authenticated user's role.
+## 🔑 Authentication Workflow
 
-## 🔐 Authentication
+1. Users register as either a Job Seeker or Recruiter.
+2. Users log in with their email and password.
+3. The backend verifies credentials and returns a JWT token.
+4. The frontend stores the token and attaches it to API requests.
+5. Protected routes and backend endpoints enforce role-based access.
 
-CareerConnect uses JWT-based authentication.
-
-1. Register an account.
-2. Log in to receive a JWT token.
-3. Use the token to access protected endpoints.
-4. Configure the token in Swagger using the **Authorize** button.
-
-Supported user roles:
+Supported roles:
 
 - `JOB_SEEKER`
 - `RECRUITER`
 
 ## 🧪 Testing
 
-The APIs were tested using Swagger UI.
+The application workflows and APIs were tested, including:
 
-Testing included:
+- User registration and login
+- JWT authentication
+- Role-based access control
+- Job posting and browsing
+- Job applications
+- Duplicate application prevention
+- Application status updates
+- Frontend production build
 
-- User registration and login.
-- JWT authentication.
-- Role-based access control.
-- Job creation and management.
-- Job applications.
-- Duplicate application prevention.
-- Application status updates.
-- Input validation and error handling.
+The React frontend production build was verified successfully using:
+
+```bash
+npm run build
+```
+
+## 🎯 Project Objective
+
+This project was developed to gain practical experience in full-stack application development, including:
+
+- Java and Spring Boot
+- REST API development
+- React frontend development
+- Database integration
+- JWT authentication and authorization
+- Frontend-backend integration
+- Git and GitHub version control
 
 ## 👩‍💻 Developer
 
@@ -210,4 +241,4 @@ GitHub: [SUMASUKASI](https://github.com/SUMASUKASI)
 
 ---
 
-*CareerConnect – Connecting Recruiters and Job Seekers.*
+⭐ CareerConnect – Connecting Recruiters and Job Seekers.
