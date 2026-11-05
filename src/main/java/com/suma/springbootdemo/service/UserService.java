@@ -34,8 +34,21 @@ public class UserService {
             );
         }
 
-        // Set default role for new users
-        user.setRole("JOB_SEEKER");
+        // Validate user role
+        String role = user.getRole();
+
+        if (role == null || role.isBlank()) {
+            role = "JOB_SEEKER";
+        }
+
+        if (!role.equals("JOB_SEEKER") && !role.equals("RECRUITER")) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "Invalid user role"
+            );
+        }
+
+        user.setRole(role);
 
         // Encrypt password
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -65,6 +78,10 @@ public class UserService {
 
         String token = jwtUtil.generateToken(existingUser.getEmail());
 
-        return new AuthResponse("Login successful!", token);
+        return new AuthResponse(
+                "Login successful!",
+                token,
+                existingUser.getRole()
+        );
     }
 }
